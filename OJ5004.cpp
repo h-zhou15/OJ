@@ -12,7 +12,7 @@ LinkList *CreatList(int M, char *id);
 void Insert_List(LinkList *head, int val);
 void DeleteList(LinkList *head, int val);
 void Addtion(LinkList *head1, LinkList *head2);
-void  PrintList(LinkList *head);
+void PrintList(LinkList *head);
 void ReverseStr(char *str);
 
 int main()
