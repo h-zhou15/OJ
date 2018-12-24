@@ -154,7 +154,31 @@ void Addtion(LinkList *head1, LinkList *head2)
 			str2 = str2->next;
 			if (str2 == NULL)
 			{
-				str1->data = str1->data + flag;
+				//str1->data = str1->data + flag;
+				while (str1 != NULL)
+				{
+					val = str1->data + flag;
+					if (val >= 10)
+					{
+						str1->data = val % 10;
+						flag = true;
+					}
+					else
+					{
+						str1->data = val % 10;
+						flag = false;
+					}
+					
+					if (str1->next == NULL && val >= 10)
+					{
+						LinkList *newnode = (LinkList*)malloc(sizeof(LinkList));
+						newnode->data = flag;
+						str1->next = newnode;
+						newnode->next = NULL;
+						break;
+					}
+					str1 = str1->next;
+				}
 			}
 
 		}
@@ -185,19 +209,21 @@ void Addtion(LinkList *head1, LinkList *head2)
 				flag = false;
 				str1->data = val % 10;
 			}
-			str1 = str1->next;
-			str2 = str2->next;
-			if (str1 == NULL && str2 == NULL)
+
+			if (str1->next == NULL && str2->next == NULL)
 			{
 				if (flag)
 				{
 					LinkList *node = (LinkList*)malloc(sizeof(LinkList));
 					node->data = flag;
-					node = str1->next;
+					str1->next = node;
 					node->next = NULL;
 				}
 			}
+			str1 = str1->next;
+			str2 = str2->next;
 		}
+
 		PrintList(head1);
 		return;
 	}
@@ -216,12 +242,12 @@ void  PrintList(LinkList *head)
 	for (int i=0; p != NULL; p = p->next,i++)
 	{
 //		printf("%d", p->data);
-		str[i] = (char)(p->data);
+		str[i] = (char)(p->data+'0');
 	}
 //	printf("\nresult\n");
 	for (int i = 0; i < strlen(str); i++)
 	{
-		printf("%d", str[strlen(str) - 1 - i]);
+		printf("%d", str[strlen(str) - 1 - i]-'0');
 	}
 }
 
