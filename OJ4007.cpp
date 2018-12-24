@@ -45,9 +45,9 @@ void Insert_List(LinkList *head, int val)
 	LinkList *p;
 	p = head;
 	
-	for (p = p->next; p != NULL; p = p->next)
+	for (; p != NULL; p = p->next)
 	{
-		if (val < p->next->data || p->next == NULL)
+		if (p->next == NULL || val < p->next->data)
 		{
 			LinkList *newnode = (LinkList*)malloc(sizeof(*newnode));
 			newnode->data = val;
